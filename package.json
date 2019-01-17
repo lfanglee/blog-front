@@ -1,0 +1,11 @@
+{
+  "name": "blog-front",
+  "version": "0.0.0",
+  "description": "my blog's front-end project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lifang <lifang961021@gmail.com>",
+  "license": "ISC"
+}
