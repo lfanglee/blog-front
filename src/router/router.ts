@@ -8,7 +8,16 @@ export const page404 = {
 };
 
 export const appRouter = [
-
+    {
+        path: '/',
+        redirect: '/welcome'
+    },
+    {
+        path: '/welcome',
+        name: 'welcome',
+        'title': '欢迎',
+        component: () => import('@/pages/index.vue')
+    }
 ];
 
 export const routes = [

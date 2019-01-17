@@ -12,4 +12,12 @@ const routeConfig = {
 
 const router = new VueRouter(<RouterOptions>routeConfig);
 
+router.beforeEach((to, from, next) => {
+
+});
+
+router.afterEach((to) => {
+
+});
+
 export default router;
