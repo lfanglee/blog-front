@@ -9,9 +9,12 @@ module.exports = {
     'parserOptions': {
         'ecmaVersion': 6,
         'sourceType': 'module',
-        'parser': 'babel-eslint',
+        'parser': 'typescript-eslint-parser',
+        'ecmaFeatures': {
+            'legacyDecorators': true
+        }
     },
-    'plugins': ['html', 'vue'],
+    'plugins': ['html', 'vue', 'typescript'],
     'rules': {
         'indent': ['error', 4],
         'quotes': ['warn', 'single'],

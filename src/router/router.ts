@@ -15,7 +15,7 @@ export const appRouter = [
     {
         path: '/welcome',
         name: 'welcome',
-        'title': '欢迎',
+        title: '欢迎',
         component: () => import('@/pages/index.vue')
     }
 ];

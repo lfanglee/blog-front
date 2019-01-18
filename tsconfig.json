@@ -30,7 +30,7 @@
         }
     },
     "files": [
-        "./src/sfc.d.ts"
+        "./src/vue-shim.d.ts"
     ],
     "include": [
         "src/**/*"
