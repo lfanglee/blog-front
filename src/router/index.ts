@@ -19,7 +19,7 @@ router.beforeEach((to, from, next) => {
 });
 
 router.afterEach((to) => {
-    // LoadingBar.finish();
+    LoadingBar.finish();
 });
 
 export default router;

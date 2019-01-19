@@ -8,8 +8,8 @@ module.exports = {
 
         host: 'http://localhost',
         port: 3000,
-        autoOpenBroswer: true,
-        useEslint: true
+        autoOpenBroswer: false,
+        useEslint: false
     },
     pro: {
         env: '"production"',

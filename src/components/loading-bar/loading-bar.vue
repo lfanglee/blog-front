@@ -72,3 +72,23 @@ export default class LoadingBar extends Vue {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.mc-loading-bar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2000;
+    .mc-loading-bar-inner {
+        transition: width .2s linear;
+    }
+    .mc-loading-bar-inner-color-primary {
+        background-color: #2d8cf0;
+    }
+    .mc-loading-bar-failed-color-error {
+        background-color: #ed4014;
+    }
+}
+</style>

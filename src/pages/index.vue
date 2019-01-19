@@ -1,7 +1,9 @@
 <template>
     <div class="page-welcome">
         welcome
-        <button @click="handleJumpNotFound">404</button>
+        <button @click="handleJumpNotFound">
+            404
+        </button>
     </div>
 </template>
 

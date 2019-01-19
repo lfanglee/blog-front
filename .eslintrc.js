@@ -28,6 +28,7 @@ module.exports = {
         'no-array-constructor': ['error'],
         'no-new-func': ['error'],
         'no-unused-vars': ['warn', { 'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false }],
+        'no-console': ['warn'],
 
         'vue/no-parsing-error': [2, { 'x-invalid-end-tag': false }],
         'vue/html-indent': ['error', 4],
