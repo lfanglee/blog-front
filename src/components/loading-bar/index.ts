@@ -92,6 +92,25 @@ class LoadingBar {
         this.hide();
     }
 
+    public config(options: IloadingBarConfig): void {
+        if (options.color) {
+            this.color = options.color;
+        }
+        if (options.failedColor) {
+            this.failedColor = options.failedColor;
+        }
+        if (options.height) {
+            this.height = options.height;
+        }
+        
+        this.destroy();
+        this.loadingBarInstance = LoadingBarClass.getInstance({
+            color: this.color,
+            failedColor: this.failedColor,
+            height: this.height
+        });
+    }
+
     public destroy(): void {
         this.clearTimer();
         this.loadingBarInstance.destroy();

@@ -13,18 +13,16 @@ interface IloadingBarConfig {
     height?: number
 }
 
-type loadingBarOptions = IloadingBarConfig | IloadingBarProps;
-
 export default class LoadingBarInstanc {
     private constructor() { }
 
-    static getInstance(props: loadingBarOptions = {}): Object {
+    static getInstance(props: IloadingBarConfig = {}): Object {
         const instance = new Vue({
             data: props,
             render(h) {
                 return h(LoadingBar, {
                     props
-                })
+                });
             }
         });
 
