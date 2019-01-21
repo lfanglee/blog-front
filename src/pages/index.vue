@@ -1,9 +1,6 @@
 <template>
     <div class="page-welcome">
-        welcome
-        <button @click="handleJumpNotFound">
-            404
-        </button>
+        
     </div>
 </template>
 
@@ -23,3 +20,16 @@ export default class Welcome extends Vue {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.page-welcome {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/Wallions284236.jpg') no-repeat 20% 20%;
+    background-size: cover;
+}
+</style>
+

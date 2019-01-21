@@ -1,0 +1,32 @@
+/// adds property prefix for css3 property
+/// @param {*} $property Property
+/// @param {*} $value Value
+@mixin css3-prefix($property, $value) {
+    -webkit-#{$property}: #{$value};
+     -khtml-#{$property}: #{$value};
+       -moz-#{$property}: #{$value};
+        -ms-#{$property}: #{$value};
+         -o-#{$property}: #{$value};
+            #{$property}: #{$value};
+}
+
+/// border radius
+/// @param {Size} $radius Radius
+/// @require {mixin} css3-prefix
+@mixin border-radius($radius: 5px) {
+    @include css3-prefix('border-radius', $radius);
+}
+
+@mixin text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@mixin content-overflow($num) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $num;
+    -webkit-box-orient: vertical;
+}

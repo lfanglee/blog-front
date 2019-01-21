@@ -17,7 +17,7 @@ interface IloadingStyle {
     backgroundColor?: string
 }
 
-type colorType = 'primary' | 'success' | 'error';
+type colorType = 'primary' | 'error';
 
 type statusType = 'success' | 'error';
 
