@@ -10,12 +10,18 @@ export const page404 = {
 export const appRouter = [
     {
         path: '/',
-        redirect: '/welcome'
+        redirect: '/home'
     },
     {
         path: '/welcome',
         name: 'welcome',
         title: '欢迎',
+        component: () => import('@/pages/welcome.vue')
+    },
+    {
+        path: '/home',
+        name: 'home',
+        title: '首页',
         component: () => import('@/pages/index.vue')
     }
 ];
