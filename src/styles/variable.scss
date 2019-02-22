@@ -34,6 +34,13 @@ $red: var(--theme-red);
 $border-color: var(--border-color);
 
 // container
+$container-left: 38rem;
+$container-min-width: $container-left;
+$container-width: $container-min-width;
+$container-right: 16rem;
+
+$gravatar: 36px;
+$header-height: 4rem;
 
 $module-bg: var(--module-bg);
 $module-hover-bg: var(--module-hover-bg);

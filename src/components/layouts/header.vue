@@ -24,15 +24,38 @@ export default class MyHeader extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~@/styles/index';
 
 header {
     @include css3-prefix('transform', translateY(0));
+    @include box-shadow(0, 1px, 2px, rgba(0, 0, 0, .05));
     position: fixed;
     top: 0;
     z-index: 999;
     width: 100%;
-    height: 4rem;
+    height: $header-height;
+    background: $white;
+    & > .header {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-width: $container-width;
+        height: $header-height;
+        padding: 0 $lg-pad;
+        line-height: $header-height;
+        & > .header-left {
+            nav {
+                & > a {
+                    margin-right: 2.25rem;
+                    color: $disabled;
+                    &:hover {
+                        color: $black;
+                    }
+                }
+            }
+        }
+    }
 }
 </style>
