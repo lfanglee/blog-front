@@ -1,14 +1,14 @@
 const now = Date.now || (() => new Date().getTime());
 
-const debounce = (fn: Function, wait: number = 1000, immediate: boolean = false) => {
+const debounce = function (fn: Function, wait: number = 1000, immediate: boolean = false) {
     let timeout: any;
-    const debounced = (...args: any[]) => {
+    const debounced = function (...args: any[]) {
         if (timeout) {
             clearTimeout(timeout);
         }
         immediate && !timeout && fn(...args);
         timeout = setTimeout(() => {
-            fn(...args);
+            fn.apply(this, args);
         }, wait);
     };
     debounced.cancel = () => {
@@ -18,16 +18,16 @@ const debounce = (fn: Function, wait: number = 1000, immediate: boolean = false)
     return debounced;
 };
 
-const throttle = (fn: Function, wait: number = 1000) => {
+const throttle = function (fn: Function, wait: number = 1000) {
     let timeout: any;
     let lastTime: number = now();
-    return (...args: any[]) => {
+    const throttled = function (...args: any[]) {
         if (timeout) {
             clearTimeout(timeout);
         }
         const nowTime = now();
         if (!lastTime || nowTime - lastTime >= wait) {
-            fn(...args);
+            fn.apply(this, args);
             lastTime = nowTime;
         } else {
             timeout = setTimeout(() => {
@@ -35,9 +35,23 @@ const throttle = (fn: Function, wait: number = 1000) => {
             }, wait);
         }
     };
+    throttled.cancel = () => {
+        clearTimeout(timeout);
+        lastTime = null;
+        timeout = null;
+    };
+    return throttled;
+};
+
+const getScrollTop = function (): number {
+    return document.documentElement.scrollTop
+        || window.pageYOffset
+        || window.scrollY
+        || document.body.scrollTop;
 };
 
 export {
     debounce,
-    throttle
+    throttle,
+    getScrollTop
 };

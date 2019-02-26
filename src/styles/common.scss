@@ -14,6 +14,17 @@ body {
     background: $white;
 }
 
+*, *:hover {
+    @include css3-prefix('transition', background-color .25s linear,
+                                       color .20s linear,
+                                       margin .25s linear,
+                                       opacity .25s linear,
+                                       filter .25s linear,
+                                       visibility .25s linear,
+                                       transform .25s linear,
+                                       border-color .25s linear)
+}
+
 .clearfix {
     &:after {
         content: '';

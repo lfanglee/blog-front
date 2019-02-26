@@ -1,5 +1,5 @@
 <template>
-    <header>
+    <header v-fix>
         <div class="header">
             <div class="header-left">
                 <nav>
@@ -15,12 +15,27 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { throttle, getScrollTop } from '@/utils/util';
 
 @Component({
     directives: {
         fix: {
             inserted(el) {
-
+                let lastScrollTop = getScrollTop();
+                window.addEventListener('scroll', throttle(() => {
+                    let nowScrollTop = getScrollTop();
+                    let delta = nowScrollTop - lastScrollTop;
+                    if (delta === 0) {
+                        return;
+                    }
+                    delta > 0 ? el.classList.add('fixed') : el.classList.remove('fixed');
+                    setTimeout(() => {
+                        lastScrollTop = nowScrollTop;
+                    });
+                }, 200));
+            },
+            unbind() {
+                window.onscroll = null;
             }
         }
     }
@@ -44,6 +59,9 @@ header {
     width: 100%;
     height: $header-height;
     background: $white;
+    &.fixed {
+        @include css3-prefix('transform', translateY(-100%));
+    }
     & > .header {
         position: relative;
         display: flex;

@@ -1,7 +1,7 @@
 /// adds property prefix for css3 property
 /// @param {*} $property Property
 /// @param {*} $value Value
-@mixin css3-prefix($property, $value) {
+@mixin css3-prefix($property, $value...) {
     -webkit-#{$property}: #{$value};
      -khtml-#{$property}: #{$value};
        -moz-#{$property}: #{$value};
