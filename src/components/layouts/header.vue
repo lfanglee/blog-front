@@ -3,9 +3,15 @@
         <div class="header">
             <div class="header-left">
                 <nav>
-                    <router-link to="/home">首页</router-link>
-                    <router-link to="/tags">标签</router-link>
-                    <router-link to="/">aaa</router-link>
+                    <div class="nav-item">
+                        <router-link to="/home">首页</router-link>
+                    </div>
+                    <div class="nav-item">
+                        <router-link to="/tags">标签</router-link>
+                    </div>
+                    <div class="nav-item">
+                        <router-link to="/">aaa</router-link>
+                    </div>
                 </nav>
             </div>
             <div class="header-right"></div>
@@ -48,7 +54,7 @@ export default class MyHeader extends Vue {
 </script>
 
 <style lang="scss">
-@import '~@/styles/index';
+@import '~@/styles/tools';
 
 header {
     @include css3-prefix('transform', translateY(0));
@@ -73,13 +79,25 @@ header {
         line-height: $header-height;
         & > .header-left {
             nav {
-                & > a {
-                    margin-right: 2.25rem;
+                display: flex;
+                & > div.nav-item {
+                    padding: 0 1.5rem;
                     color: $disabled;
                     &:hover {
                         color: $black;
                     }
                 }
+            }
+        }
+    }
+    nav {
+        a {
+            color: $disabled;
+            &:hover {
+                color: $black;
+            }
+            &.router-link-active {
+                color: $black;
             }
         }
     }

@@ -50,8 +50,13 @@ const getScrollTop = function (): number {
         || document.body.scrollTop;
 };
 
+const setScrollTop = function (scrollTop): void {
+    document.scrollingElement.scrollTop = scrollTop;
+}
+
 export {
     debounce,
     throttle,
-    getScrollTop
+    getScrollTop,
+    setScrollTop
 };
