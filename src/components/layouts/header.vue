@@ -1,16 +1,10 @@
 <template>
-    <header v-fix>
+    <header v-fix :class="{mobile: mobileLayout}">
         <div class="header">
             <div class="header-left">
                 <nav>
-                    <div class="nav-item">
-                        <router-link to="/home">首页</router-link>
-                    </div>
-                    <div class="nav-item">
-                        <router-link to="/tags">标签</router-link>
-                    </div>
-                    <div class="nav-item">
-                        <router-link to="/">aaa</router-link>
+                    <div v-for="(item, index) in nav" :key="index" class="nav-item">
+                        <router-link :to="item.path">{{ item.name }}</router-link>
                     </div>
                 </nav>
             </div>
@@ -22,6 +16,11 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { throttle, getScrollTop } from '@/utils/util';
+
+interface RouterLink {
+    path: string,
+    name: string
+}
 
 @Component({
     directives: {
@@ -47,18 +46,23 @@ import { throttle, getScrollTop } from '@/utils/util';
     }
 })
 export default class MyHeader extends Vue {
-    mounted(): void {
-        
+    nav: Array<RouterLink> = [
+        { path: '/home', name: '文章' },
+        { path: '/tags', name: '归档' },
+        { path: '/about', name: '关于我' }
+    ];
+    get mobileLayout(): boolean {
+        return this.$store.state.app.mobileLayout;
     }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '~@/styles/tools';
 
 header {
     @include css3-prefix('transform', translateY(0));
-    @include box-shadow(0, 1px, 2px, rgba(0, 0, 0, .05));
+    @include box-shadow(0, 1px, 2px, 0, rgba(0, 0, 0, .05));
     position: fixed;
     top: 0;
     z-index: 999;

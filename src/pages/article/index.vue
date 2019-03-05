@@ -1,14 +1,12 @@
 <template>
-    <div style="height: 2000px;">
-        
-    </div>
+    <div>article</div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 
 @Component
-export default class Home extends Vue {
+export default class Article extends Vue {
     
 }
 </script>

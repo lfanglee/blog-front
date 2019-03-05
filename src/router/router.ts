@@ -23,6 +23,12 @@ export const appRouter = [
         name: 'home',
         title: '首页',
         component: () => import('@/pages/index.vue')
+    },
+    {
+        path: '/article/*',
+        name: 'article',
+        title: '文章',
+        component: () => import('@/pages/article/index.vue')
     }
 ];
 

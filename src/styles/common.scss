@@ -25,6 +25,29 @@ body {
                                        border-color .25s linear)
 }
 
+.container {
+    width: $container-width;
+    margin: 0 auto;
+}
+
+.line {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    color: $border-color;
+    background: currentColor;
+}
+
+.hr {
+    display: inline-block;
+    width: 2px;
+    height: 2px;
+    background: #AAB2BD;
+    margin: 4px .6rem;
+}
+
 .clearfix {
     &:after {
         content: '';
