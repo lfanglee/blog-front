@@ -13,6 +13,8 @@
     --module-hover-bg: #{rgba($theme-black, .12)};
     --module-hover-bg-light-3: #{lighten(rgba($theme-black, .12), 30%)};
     --module-hover-bg-light-3: #{lighten(rgba($theme-black, .12), 50%)};
+    
+    --code-bg: #{darken($theme-white, 3%)};
 
     --theme-white: #{$theme-white};
     --theme-black: #{$theme-black};
@@ -38,9 +40,9 @@ body {
         @include theme(
             $theme-white: #fff,
             $theme-black: #24292e,
-            $theme-red: #ea6f5a,
-            $theme-primary: #20a0ff,
-            $theme-green: #5ab95c,
+            $theme-red: #ca5c54,
+            $theme-primary: #75bfd7,
+            $theme-green: #73bf69,
             $border-color: #eee,
             $theme-text: #666
         );
@@ -49,9 +51,9 @@ body {
         @include theme(
             $theme-white: #4a4a4a,
             $theme-black: #c8c8c8,
-            $theme-red: #ea6f5a,
-            $theme-primary: #20A0FF,
-            $theme-green: #5ab95c,
+            $theme-red: #ca5c54,
+            $theme-primary: #75bfd7,
+            $theme-green: #73bf69,
             $border-color: #696969,
             $theme-text: #999999
         )

@@ -1,0 +1,36 @@
+{
+    "ret": 0,
+    "ret_msg": "文章获取成功",
+    "result": {
+        "_id": "5c3b20fe57666419fe3d408c",
+        "id": 64,
+        "title": "问答方式学 Node.js（二）",
+        "keyword": "nodejs",
+        "descript": "\nNode.js 就不相同了，它使用了「非阻塞」与「事件驱动」模型，你可以把它想象成一个 Event Loop 循环，这个循环会一直跑。一个新的请求来了，Event Loop 接收这个请求，然后交给其他线程，比如查询数据库，然后响应一个 callback，接着接收其他请求，而不是等待数据库结果的返回。",
+        "content": "### Q: 好了，我们继续谈谈 Node.js 吧，我记得上次说到了「非阻塞」和「事件驱动」，这引起了我的好奇心，但是又给我泼了一桶冷水，这两个词有点高端。\n\nA：别急，我们先来看一个简单的场景：\n\n人人网刷朋友新鲜事你应该用过吧？实现这样的功能有一种简单的方式，是让用户与服务器之间保持一个长轮询。\n\n但是它与普通的 Ajax 不一样，服务器不会立马返回信息，它会先 hold 住，等待应该返回信息了，它才会返回信息（比如你的好友发了一条新的状态）。\n\n从传统服务端来看（比如 Apache），每次一个新用户连到你的网站上，你的服务器得新开一个连接，每个连接都需要占用一个线程，这些线程大部分都是闲着的（比如等你的好友发状态，查数据库等），虽然它们是闲着的，但是照样占用了内存，也就是说，如果用户达到一定的规模，服务器的内存就会耗光而瘫痪。\n\n解决办法有很多，比如说使用线程池，但是它依然是阻塞的，如果线程池里的所有线程都被阻塞（网速慢，被人恶意暂用）那么接下来的请求将会排队等待。\n\nNode.js 就不相同了，它使用了「非阻塞」与「事件驱动」模型，你可以把它想象成一个 Event Loop 循环，这个循环会一直跑。一个新的请求来了，Event Loop 接收这个请求，然后交给其他线程，比如查询数据库，然后响应一个 callback，接着接收其他请求，而不是等待数据库结果的返回。\n\n如果数据库返回了结果，服务端将会把它返回给客户端，并继续循环。这就是**事件驱动**：服务端只在有事情发生时，才会有相应的处理（或者是接受请求，或者是一些 callback）。\n\n### Q：这么看来，Node.js 的非阻塞和事件驱动，是基于这个 Event Loop 的？\n\nA：是的，简单来讲，Node.js 的 Event Loop 是基于 libuv，而浏览器的 Event Loop 则是在 [html5 规范](https://www.w3.org/TR/html5/webappapis.html#event-loops) 中定义，具体实现交给浏览器厂商。\n\n### Q：有趣了，还有两种 Event Loop。\n\nA：对比来看，它们有点相似：\n\n在浏览器中比较简单，值得注意的一点是，会在每个 tasks 之后，会把当前 microtask 队列里的任务都执行完：\n\n![](https://static.jkchao.cn/node/event-loop.png)\n\n\nNode.js 稍微复杂一点，每次 Event Loop 都需要经过六个阶段，每一个阶段之后，都会执行 nextTick、microtasks (resolved promise, 等)：\n\n\n```ts\n   ┌───────────────────────┐\n┌─>│        timers         │ <─── setTimeout/setInterval callback\n│  └──────────┬────────────┘      ┌─────────────────────────┐\n│             │                   │ nextTick queue          │\n│             │ <───────────────  │                         │\n│             │                   │ microTask queue         │\n│  ┌──────────┴────────────┐      └─────────────────────────┘\n│  │     I/O callbacks     │\n│  └──────────┬────────────┘      ┌─────────────────────────┐\n│             │                   │ nextTick queue          │\n│             │ <───────────────  │                         │\n│             │                   │ microTask queue         │\n│  ┌──────────┴────────────┐      └─────────────────────────┘\n│  │     idle, prepare     │ <─── 仅内部使用\n│  └──────────┬────────────┘\n│             │                   ┌─────────────────────────┐\n│             │                   │ nextTick queue          │\n│             │ <──────────────── │                         │\n│             │                   │ microTask queue         │\n│             │                   └─────────────────────────┘\n│             │                   ┌─────────────────────────┐\n│  ┌──────────┴────────────┐      │      incoming:          │\n│  │         poll          │ <────┤      connections,       │\n│  └──────────┬────────────┘      │      data, etc          │\n│             │                   └─────────────────────────┘\n│             │                   ┌─────────────────────────┐\n│             │                   │ nextTick queue          │\n│             │ <──────────────── │                         │\n│             │                   │ microTask queue         │\n│             │                   └─────────────────────────┘\n│  ┌──────────┴────────────┐\n│  │        check          │ <─── setImmediate callback\n│  └──────────┬────────────┘      ┌─────────────────────────┐\n│             │                   │ nextTick queue          │\n│             │ <───────────────  │                         │\n│             │                   │ microTask queue         │\n│  ┌──────────┴────────────┐      └─────────────────────────┘\n│  │    close callbacks    │ <─── eg: socket.on(\"close\",func)\n│  └──────────┬────────────┘      ┌─────────────────────────┐\n│             │                   │ nextTick queue          │\n│             │ <───────────────  │                         │\n└─────────────┴                   │ microTask queue         │\n                                  └─────────────────────────┘\n```\n\n来一段简单的代码，猜猜浏览器（Chrome）和 Node.js 分别输出什么：\n\n```js\nconsole.log('start');\n\nsetTimeout(() => {\n  console.log('timer1');\n  Promise.resolve().then(() => {\n      console.log('promise1');\n  });\n}, 0);\n\nsetTimeout(() => {\n  console.log('timer2');\n  Promise.resolve().then(() => {\n    console.log('promise2');\n  });\n}, 0);\n\nconsole.log('end');\n```\n\n### Q：浏览器 (Chrome) 中肯定是输出 start、end、time1、promise1、time2、promise2，至于 Node.js 中，我猜也是一样的吧？\n\nA：我们先来验证一下：\n\n浏览器中：\n\n```js\nstart\nend\ntimer1\npromise1\ntimer2\npromise2\n```\n\nNode.js 中：\n\n```js\nstart\nend\ntimer1\ntimer2\npromise1\npromise2\n```\n\n看来和想象中的不一样，别急，看个动图就会明白了：\n\n浏览器中：\n\n![](https://static.jkchao.cn/node/event-loop1.gif)\n\nNode.js 中：\n\n![](https://static.jkchao.cn/node/event-loop2.gif)\n\n\n### Q：原来是这样，那如果在每个 `setTimeout callback` 里加上 `process.nextTick` 那么是比 `Promise.then` 先执行？\n\nA：是的，还记得上面所说过的吗，在每个阶段后都会执行 nextTick queue 以及 micktasks queue，nextTick queue 的优先级比 micktasks queue 高。\n\n\n### Q：我懂了。对了，我记得你提到了 libuv，它是什么？不是说 Node.js 使用的是 v8 吗，它和 v8 又有什么关系？\n\nA：...\n\n未完待续...\n\n\n### 其他\n- [问答方式学 Node.js（一）](https://jkchao.cn/article/5c247bb6e35fb85c4c7e1283)\n\n\n\n### 参考\n\n- https://blog.csdn.net/wtopps/article/details/71339295\n- [Node.js 是用来做什么的？ - 厂长的回答](https://www.zhihu.com/question/33578075/answer/56951771)\n- [Promises, Next-Ticks and Immediates— NodeJS Event Loop Part 3](https://jsblog.insiderattack.net/promises-next-ticks-and-immediates-nodejs-event-loop-part-3-9226cbe7a6aa)\n- [更快的异步函数和 Promise](https://v8.js.cn/blog/fast-async/)",
+        "type": 1,
+        "thumb": "https://static.jkchao.cn/nodejs-new-pantone-black.png",
+        "__v": 0,
+        "meta": {
+            "comments": 9,
+            "likes": 23,
+            "views": 521
+        },
+        "update_at": "2019-02-17T06:41:18.313Z",
+        "create_at": "2019-01-13T11:29:02.509Z",
+        "publish": 1,
+        "state": 1,
+        "tag": [
+            {
+                "_id": "59d6df5fc72f12628eea9425",
+                "id": 6,
+                "name": "Node.js",
+                "descript": "运行与服务器端的 JavaScript",
+                "__v": 0,
+                "update_at": "2019-01-05T10:32:14.707Z",
+                "sort": 13,
+                "create_at": "2017-10-06T01:41:51.905Z"
+            }
+        ]
+    }
+}

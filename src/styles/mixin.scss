@@ -11,19 +11,19 @@
 }
 
 /// border radius
-/// @param {Size} $radius [5px] Radius
+/// @param {Size} $radius [4px] Radius
 /// @require {mixin} css3-prefix
-@mixin border-radius($radius: 5px) {
+@mixin border-radius($radius: 4px) {
     @include css3-prefix('border-radius', $radius);
 }
 
 /// border radius separate
-/// @param {Size} $topLeftRadius [5px] topLeftRadius
-/// @param {Size} $topRightRadius [5px] topRightRadius
-/// @param {Size} $bottomLeftRadius [5px] bottomLeftRadius
-/// @param {Size} $bottomRightRadius [5px] bottomRightRadius
+/// @param {Size} $topLeftRadius [4px] topLeftRadius
+/// @param {Size} $topRightRadius [4px] topRightRadius
+/// @param {Size} $bottomLeftRadius [4px] bottomLeftRadius
+/// @param {Size} $bottomRightRadius [4px] bottomRightRadius
 /// @require {mixin} css3-prefix
-@mixin border-radius-separate($topLeftRadius: 5px, $topRightRadius: 5px, $bottomLeftRadius: 5px, $bottomRightRadius: 5px) {
+@mixin border-radius-separate($topLeftRadius: 4px, $topRightRadius: 4px, $bottomLeftRadius: 4px, $bottomRightRadius: 4px) {
     @include css3-prefix('border-top-left-radius', $topLeftRadius);
     @include css3-prefix('border-top-right-radius', $topRightRadius);
     @include css3-prefix('border-bottom-left-radius', $bottomLeftRadius);

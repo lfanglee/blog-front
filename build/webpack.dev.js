@@ -1,5 +1,5 @@
 'use strict';
-const path = require('path');
+const pathUtil = require('path');
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -22,18 +22,16 @@ module.exports = merge(baseConfig, {
                 secure: false
             },
             '/api': {
-                target: config.dev.host,
+                target: `${config.dev.host}:${config.dev.port}/mock`,
+                pathRewrite: (path, req) => {
+                    const realUrl = req.url.split('?')[0];
+                    if (!pathUtil.extname(realUrl)) {
+                        req.url = realUrl + '.json';
+                    }
+                    req.url = req.url.replace(/\/api/, '');
+                },
                 secure: false
             },
-            
-            // '/api/admin/user': {
-            //     target: 'http://127.0.0.1:7300/mock/5ad84fa84dd6dd6f9d70707e',
-            //     secure: false
-            // },
-            // '/api/admin/house': {
-            //     target: 'http://127.0.0.1:7300/mock/5ad8579794f54f70cb91ad76',
-            //     secure: false
-            // }
         }
     },
     output: {
@@ -52,17 +50,6 @@ module.exports = merge(baseConfig, {
             title: 'iLive-admin',
             inject: true
         }),
-        // new CopyWebpackPlugin([
-        //     {
-        //         from: 'src/views/main-components/text-editor/tinymce',
-        //         to: 'js'
-        //     }
-        // ], 
-        // {
-        //     ignore: [
-        //         'text-editor.vue'
-        //     ]
-        // }),
         new webpack.optimize.CommonsChunkPlugin({
             name: ['vendor-base', 'vendor-exten'],
             minChunks: Infinity

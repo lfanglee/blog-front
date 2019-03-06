@@ -31,6 +31,7 @@ module.exports = {
         'no-console': ['warn'],
 
         'vue/no-parsing-error': [2, { 'x-invalid-end-tag': false }],
+        'vue/no-v-html': 'off',
         'vue/html-indent': ['error', 4],
         'vue/max-attributes-per-line': 'off',
         'vue/html-self-closing': 'off',
