@@ -50,13 +50,44 @@ const getScrollTop = function (): number {
         || document.body.scrollTop;
 };
 
-const setScrollTop = function (scrollTop): void {
+const setScrollTop = function (scrollTop: number): void {
     document.scrollingElement.scrollTop = scrollTop;
-}
+};
+
+const dateFormat = (times: string, format: string) => {
+    const time = Date.parse(times);
+    const fromNow = (Date.now() - time) / 1000;
+    if (fromNow < 60) {
+        return '刚刚';
+    } else if (fromNow < 60 * 60) {
+        return `${~~(fromNow / 60)}分钟前`;
+    } else if (fromNow < 60 * 60 * 24) {
+        return `${~~(fromNow / 3600)}小时前`;
+    }
+
+    const date = new Date(time);
+    const obj = {
+        'M+': date.getMonth() + 1,
+        'd+': date.getDate(),
+        'h+': date.getHours(),
+        'm+': date.getMinutes(),
+        's+': date.getSeconds()
+    };
+    if (/(y+)/.test(format)) {
+        format = format.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
+    }
+    for (let key in obj) {
+        if (new RegExp('(' + key + ')').test(format)) {
+            format = format.replace(RegExp.$1, RegExp.$1.length === 1 ? obj[key] : ('00' + obj[key]).substr(('' + obj[key]).length));
+        }
+    }
+    return format;
+};
 
 export {
     debounce,
     throttle,
     getScrollTop,
-    setScrollTop
+    setScrollTop,
+    dateFormat
 };

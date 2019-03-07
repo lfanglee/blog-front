@@ -1,24 +1,57 @@
 <template>
     <div class="c-page-article">
         <div class="article-wrapper">
-            <h3 class="article-title">{{ article.title }}</h3>
-            <div class="meta"></div>
-            <div class="article-content" v-html="article"></div>
+            <h3 class="article-title">{{ articleDetail.title }}</h3>
+            <div class="meta">
+                <span class="time">{{ articleDetail.create_at | dateFormat('yyyy.MM.dd hh:mm') }}</span>
+                <span class="num">字数 {{ articleDetail.content && articleDetail.content.length }}</span>
+            </div>
+            <div class="article-content" v-html="articleContent"></div>
+        </div>
+        <div class="info-panel">
+            <div class="info">
+                <div class="info-left">
+                    <span class="tags">
+                        <m-icon type="tags-fill" />
+                        <router-link
+                            v-for="(list, index) in articleDetail.tags"
+                            :key="index"
+                            :to="`/tag/${list._id}`">
+                            {{ list.name }}
+                        </router-link>
+                    </span>
+                </div>
+                <div class="info-right">
+                    版权信息：非商用-署名-自由转载
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import { Action, State, namespace } from 'vuex-class';
+import { ArticleDetail } from '@/store/modules/article';
 import marked from '@/utils/marked';
-import { getArticle } from '@/utils/service';
+
+const articleModule = namespace('article');
 
 @Component
 export default class Article extends Vue {
-    article: string = '';
+    @articleModule.State('detail')
+    articleDetail: ArticleDetail;
+    @articleModule.Action('getArticle')
+    getArticle: Function;
+
+    get articleContent(): string {
+        return marked(this.articleDetail.content).html;
+    }
+
     async created(): Promise<any> {
-        const articleInfo = await getArticle({ id: 'articleDemo' });
-        this.article = marked(articleInfo.result.content).html;
+        this.getArticle({
+            id: 'articleDemo'
+        });
     }
 }
 </script>
@@ -29,6 +62,28 @@ export default class Article extends Vue {
 .c-page-article {
     width: $container-width;
     margin: 0 auto;
+    .article-title {
+        font-size: 2rem;
+        color: $black;
+    }
+    .meta {
+        margin-top: .3rem;
+        font-size: .8rem;
+        color: $descript;
+        span {
+            margin-right: .5rem;
+        }
+    }
+    .info-panel {
+        margin: $xlg-pad 0;
+        padding: $lg-pad 0;
+        .info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: $disabled;
+        }
+    }
     .article-content {
         margin: $lg-pad 0;
         color: $black;

@@ -26,8 +26,8 @@ module.exports = {
         'no-var': ['error'],
         'no-new-object': ['error'],
         'no-array-constructor': ['error'],
+        "no-unused-vars": "off",
         'no-new-func': ['error'],
-        'no-unused-vars': ['warn', { 'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false }],
         'no-console': ['warn'],
 
         'vue/no-parsing-error': [2, { 'x-invalid-end-tag': false }],
@@ -35,6 +35,8 @@ module.exports = {
         'vue/html-indent': ['error', 4],
         'vue/max-attributes-per-line': 'off',
         'vue/html-self-closing': 'off',
-        'vue/singleline-html-element-content-newline': 'off'
+        'vue/singleline-html-element-content-newline': 'off',
+
+        'typescript/no-unused-vars': ['warn', { 'vars': 'all', 'args': 'after-used', 'ignoreRestSiblings': false }]
     }
 };
