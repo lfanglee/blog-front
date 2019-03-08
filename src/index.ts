@@ -8,7 +8,7 @@ import Icon from '@/components/icon/index.vue';
 
 import './styles/index.scss';
 
-Vue.component('m-icon', Icon);
+Vue.component('c-icon', Icon);
 
 Vue.filter('dateFormat', (time: string, format: string) => {
     if (!time) {

@@ -12,7 +12,7 @@
             <div class="info">
                 <div class="info-left">
                     <span class="tags">
-                        <m-icon type="tags-fill" />
+                        <c-icon type="tags-fill" />
                         <router-link
                             v-for="(list, index) in articleDetail.tags"
                             :key="index"
@@ -32,8 +32,10 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { Action, State, namespace } from 'vuex-class';
-import { ArticleDetail } from '@/store/modules/article';
+import { ArticleDetail } from '@/store/modules/article/interface';
 import marked from '@/utils/marked';
+
+type GetArticleFn = (data: { id: string }) => Promise<any>;
 
 const articleModule = namespace('article');
 
@@ -42,8 +44,9 @@ export default class Article extends Vue {
     @articleModule.State('detail')
     articleDetail: ArticleDetail;
     @articleModule.Action('getArticle')
-    getArticle: Function;
+    getArticle: GetArticleFn;
 
+    res: Ajax.AjaxResponse;
     get articleContent(): string {
         return marked(this.articleDetail.content).html;
     }

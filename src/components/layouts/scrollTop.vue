@@ -5,7 +5,7 @@
         class="scroll-aside"
         :class="{mobile: mobileLayout}">
         <a v-if="showScroll" key="1" class="scroll-btn" href="javascript:void(0)" @click="scrollTop">
-            <m-icon type="arrow-up"></m-icon>
+            <c-icon type="arrow-up"></c-icon>
         </a>
     </transition-group>
 </template>

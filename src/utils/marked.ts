@@ -38,7 +38,7 @@ marked.setOptions({
     }
 });
 
-renderer.link = (href, title, text) => {
+renderer.link = (href: string, title: string, text: string) => {
     return `<a href="${href}"
                 target="${href.substr(0, 1) === '#' ? '_self' : '_blank'}"
                 class="${href.substr(0, 1) === '#' ? '' : 'c-link'}">

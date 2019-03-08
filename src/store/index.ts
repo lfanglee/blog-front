@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
-import app from './modules/app';
-import article from './modules/article';
+import app from './modules/app/index';
+import article from './modules/article/index';
 
 Vue.use(Vuex);
 

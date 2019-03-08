@@ -1,7 +1,7 @@
 {
-    "ret": 0,
-    "ret_msg": "文章获取成功",
-    "result": {
+    "code": 0,
+    "message": "文章获取成功",
+    "data": {
         "_id": "5c3b20fe57666419fe3d408c",
         "id": 64,
         "title": "问答方式学 Node.js（二）",
