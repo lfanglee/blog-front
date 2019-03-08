@@ -3,7 +3,7 @@
         <div class="article-wrapper">
             <h3 class="article-title">{{ articleDetail.title }}</h3>
             <div class="meta">
-                <span class="time">{{ articleDetail.create_at | dateFormat('yyyy.MM.dd hh:mm') }}</span>
+                <span class="time">{{ articleDetail.createAt | dateFormat('yyyy.MM.dd hh:mm') }}</span>
                 <span class="num">字数 {{ articleDetail.content && articleDetail.content.length }}</span>
             </div>
             <div class="article-content" v-html="articleContent"></div>
@@ -33,9 +33,10 @@
 import { Vue, Component } from 'vue-property-decorator';
 import { Action, State, namespace } from 'vuex-class';
 import { ArticleDetail } from '@/store/modules/article/interface';
+import { GetArticleParams } from '@/services/interface';
 import marked from '@/utils/marked';
 
-type GetArticleFn = (data: { id: string }) => Promise<any>;
+type GetArticleFn = (params: GetArticleParams) => void;
 
 const articleModule = namespace('article');
 

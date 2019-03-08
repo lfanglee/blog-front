@@ -4,3 +4,5 @@ export const SET_MOBILE_LAYOUT = 'SET_MOBILE_LAYOUT';  // 设置是否是移动�
 
 // article
 export const SET_ARTICLE_DETAIL = 'SET_ARTICLE_DETAIL'; // 设置文章详情页数据
+
+export const SET_ARTICLE_LIST = 'SET_ARTICLE_LIST'; // 设置文章列表
