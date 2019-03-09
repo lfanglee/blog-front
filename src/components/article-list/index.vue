@@ -37,10 +37,14 @@ export default class ArticleList extends Vue {
     })
     pagegation: Pagegation;
 
-    curPage: number = +this.$route.params;
+    curPage: number = 1;
 
     get showArticleEmpty(): boolean {
         return !this.list || this.list.length === 0;
+    }
+
+    created(): void {
+        this.curPage = +this.$route.params.id || 1;
     }
 }
 </script>

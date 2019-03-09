@@ -55,10 +55,8 @@
     "typescript-eslint-parser": "^21.0.2",
     "url-loader": "^1.1.2",
     "vue-loader": "^15.5.1",
-    "vue-property-decorator": "^7.3.0",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.22",
-    "vuex-class": "^0.3.1",
     "webpack": "^3.12.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^2.11.3",
@@ -70,6 +68,8 @@
     "js-cookie": "^2.2.0",
     "marked": "^0.6.1",
     "vue": "^2.5.22",
+    "vue-property-decorator": "^8.0.0",
+    "vuex-class": "^0.3.1",
     "vue-router": "^3.0.2",
     "vuex": "^3.0.1"
   }

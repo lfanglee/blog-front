@@ -10,7 +10,7 @@ export const page404 = {
 export const appRouter = [
     {
         path: '/',
-        redirect: { name: 'articles', params: { id: 1 } }
+        component: () => import('@/pages/index.vue')
     },
     {
         path: '/welcome',
