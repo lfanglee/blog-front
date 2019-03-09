@@ -10,7 +10,7 @@ export const page404 = {
 export const appRouter = [
     {
         path: '/',
-        redirect: '/home'
+        redirect: { name: 'articles', params: { id: 1 } }
     },
     {
         path: '/welcome',
@@ -19,13 +19,13 @@ export const appRouter = [
         component: () => import('@/pages/welcome.vue')
     },
     {
-        path: '/home',
-        name: 'home',
-        title: '首页',
+        path: '/:id',
+        name: 'articles',
+        title: '文章列表',
         component: () => import('@/pages/index.vue')
     },
     {
-        path: '/article/*',
+        path: '/article/:id',
         name: 'article',
         title: '文章',
         component: () => import('@/pages/article/index.vue')

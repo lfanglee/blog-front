@@ -47,7 +47,7 @@ interface RouterLink {
 })
 export default class MyHeader extends Vue {
     nav: Array<RouterLink> = [
-        { path: '/home', name: '文章' },
+        { path: '/', name: '文章' },
         { path: '/tags', name: '归档' },
         { path: '/about', name: '关于我' }
     ];
