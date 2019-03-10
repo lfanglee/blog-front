@@ -29,6 +29,7 @@ export default class MyFooter extends Vue {
 @import '~@/styles/tools';
 
 footer {
+    margin-top: $normal-pad;
     padding: $normal-pad 0;
     background: $white;
     border-top: 1px solid $border-color;

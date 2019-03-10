@@ -13,9 +13,13 @@
             </div>
         </div>
         <div v-if="showArticleEmpty" class="article-empty">没有文章了</div>
-        <div class="pagegation">
-            <div class="pre-page"></div>
-            <div class="next-page"></div>
+        <div v-if="showPagegation" class="pagegation">
+            <div v-if="showPrePage" class="pre-page">
+                <router-link :to="`/${this.prePage}`">上一页</router-link>
+            </div>
+            <div v-if="showNextPage" class="next-page">
+                <router-link :to="`/${this.nextPage}`">下一页</router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -41,6 +45,22 @@ export default class ArticleList extends Vue {
 
     get showArticleEmpty(): boolean {
         return !this.list || this.list.length === 0;
+    }
+    get showPagegation(): boolean {
+        return this.pagegation && this.pagegation.totalPage > 1;
+    }
+    get showPrePage(): boolean {
+        return this.pagegation.pageNo > 1;
+    }
+    get showNextPage(): boolean {
+        return this.pagegation.pageNo < this.pagegation.totalPage;
+    }
+    get prePage(): number {
+        return this.pagegation.pageNo > 1 ? this.pagegation.pageNo - 1 : 1;
+    }
+    get nextPage(): number {
+        const { pageNo = 1, totalPage = 1 } = this.pagegation;
+        return pageNo < totalPage ? pageNo + 1 : totalPage;
     }
 
     created(): void {
@@ -97,6 +117,16 @@ export default class ArticleList extends Vue {
         color: $black;
         margin-top: $md-pad;
         padding: $md-pad 0;
+    }
+    .pagegation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .pre-page,
+        .next-page {
+            padding: $md-pad 0;
+            color: $black;
+        }
     }
 }
 </style>

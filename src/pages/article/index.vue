@@ -112,6 +112,12 @@ export default class Article extends Vue {
             @include border-radius;
             max-width: 100%;
         }
+        code {
+            padding: .2rem .4rem;
+            margin: 0;
+            border-radius: 4px;
+            background-color: $module-hover-bg;
+        }
         pre {
             @include border-radius(3px);
             margin-bottom: $normal-pad;
@@ -127,6 +133,7 @@ export default class Article extends Vue {
                 height: 100%;
                 font-family: Roboto Mono,Monaco,courier,monospace;
                 line-height: 1.6rem;
+                background-color: transparent;
             }
         }
         ul,
