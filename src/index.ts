@@ -3,6 +3,7 @@ import App from './App.vue';
 import router from './router/index';
 import store from './store/index';
 import { dateFormat, textOverflow, getMonthNameFromIndex } from '@/utils/util';
+import '@/router/class-component-hooks';
 
 import Icon from '@/components/icon/index.vue';
 

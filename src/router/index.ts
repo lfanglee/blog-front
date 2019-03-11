@@ -8,17 +8,20 @@ Vue.use(VueRouter);
 const routeConfig = {
     mode: 'history',
     base: '/',
-    routes: routes
+    routes: routes,
+    scrollBehavior (_to: any, _from: any, _savedPosition: any) {
+        return { x: 0, y: 0 };
+    }
 };
 
 const router = new VueRouter(<RouterOptions>routeConfig);
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((_to, _from, next) => {
     LoadingBar.start();
     next();
 });
 
-router.afterEach((to) => {
+router.afterEach((_to) => {
     LoadingBar.finish();
 });
 

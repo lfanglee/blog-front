@@ -4,7 +4,7 @@
             <div class="header-left">
                 <nav>
                     <div v-for="(item, index) in nav" :key="index" class="nav-item">
-                        <router-link :to="item.path">{{ item.name }}</router-link>
+                        <router-link :to="item.path" exact>{{ item.name }}</router-link>
                     </div>
                 </nav>
                 <div class="header-logo">

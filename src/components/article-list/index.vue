@@ -1,6 +1,6 @@
 <template>
     <div class="c-article-list">
-        <div class="article-list">
+        <div v-show="!showLoading" class="article-list">
             <div
                 class="article-list-item"
                 v-for="(item, index) in list"
@@ -12,7 +12,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="showArticleEmpty" class="article-empty">没有文章了</div>
+        <div v-if="showArticleEmpty && !showLoading" class="article-empty">没有文章了</div>
         <div v-if="showPagegation" class="pagegation">
             <div v-if="showPrePage" class="pre-page">
                 <router-link :to="`/${this.prePage}`">上一页</router-link>
@@ -21,15 +21,26 @@
                 <router-link :to="`/${this.nextPage}`">下一页</router-link>
             </div>
         </div>
+        <div class="loading-artilce">
+            <page-loading ref="pageLoading"></page-loading>
+        </div>
     </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import PageLoading from '@/components/loading/pageLoading.vue';
 import { ArticleListItem, Pagegation } from '@/store/modules/article/interface';
 
-@Component
+@Component({
+    components: {
+        PageLoading
+    }
+})
 export default class ArticleList extends Vue {
+    $refs: {
+        pageLoading: PageLoading
+    }
     @Prop({
         type: Array,
         default: () => []
@@ -40,6 +51,11 @@ export default class ArticleList extends Vue {
         default: () => {}
     })
     pagegation: Pagegation;
+    @Prop({
+        type: Boolean,
+        default: false
+    })
+    showLoading: boolean;
 
     curPage: number = 1;
 
@@ -61,6 +77,11 @@ export default class ArticleList extends Vue {
     get nextPage(): number {
         const { pageNo = 1, totalPage = 1 } = this.pagegation;
         return pageNo < totalPage ? pageNo + 1 : totalPage;
+    }
+
+    @Watch('showLoading')
+    onShowLoadingChange(newVal: boolean) {
+        newVal ? this.$refs.pageLoading.show() : this.$refs.pageLoading.hide();
     }
 
     created(): void {

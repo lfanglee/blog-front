@@ -1,6 +1,7 @@
 <template>
     <div class="c-page-index container">
         <article-list
+            :showLoading="isLoading"
             :list="articleList"
             :pagegation="pagegation" />
     </div>
@@ -31,12 +32,30 @@ export default class Home extends Vue {
     @articleModule.Action('getArticleList')
     getArticleList: GetArticleListFn;
 
+    curPageNo: number = 1;
+    isLoading: boolean = false;
+
     async created(): Promise<any> {
-        this.getArticleList({
-            tag: 'xxx',
-            pageNo: 1,
+        await this.loadArticleList(+this.$route.params.pageNo || 1);
+    }
+
+    async beforeRouteUpdate (to, from, next) {
+        const { params } = to;
+        if (params && +params.pageNo !== this.curPageNo) {
+            await this.loadArticleList(+params.pageNo);
+        }
+        next();
+    }
+
+    async loadArticleList(pageNo: number = 1) {
+        this.curPageNo = +pageNo || 1;
+        this.isLoading = true;
+        await this.getArticleList({    
+            tag: 'xxx',       
+            pageNo: pageNo,
             pageSize: 6
         });
+        this.isLoading = false;    
     }
     
 }

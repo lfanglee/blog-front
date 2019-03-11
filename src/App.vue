@@ -3,7 +3,9 @@
         <my-header />
         <scroll-top />
         <div class="main-container">
-            <router-view></router-view>
+            <transition name="fade">
+                <router-view></router-view>
+            </transition>
         </div>
         <my-footer />
     </div>
