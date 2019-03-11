@@ -2,7 +2,9 @@
     <div id="main" class="app-main">
         <my-header />
         <scroll-top />
-        <router-view></router-view>
+        <div class="main-container">
+            <router-view></router-view>
+        </div>
         <my-footer />
     </div>
 </template>

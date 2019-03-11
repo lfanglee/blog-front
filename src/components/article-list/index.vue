@@ -64,7 +64,7 @@ export default class ArticleList extends Vue {
     }
 
     created(): void {
-        this.curPage = +this.$route.params.id || 1;
+        this.curPage = +this.$route.params.pageNo || 1;
     }
 }
 </script>

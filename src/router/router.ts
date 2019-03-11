@@ -1,5 +1,5 @@
 export const page404 = {
-    path: '/*',
+    path: '*',
     name: 'error-404',
     meta: {
         title: '404-页面不存在'
@@ -9,19 +9,16 @@ export const page404 = {
 
 export const appRouter = [
     {
-        path: '/',
-        component: () => import('@/pages/index.vue')
-    },
-    {
         path: '/welcome',
         name: 'welcome',
         title: '欢迎',
         component: () => import('@/pages/welcome.vue')
     },
     {
-        path: '/:id',
+        path: '/articles/:pageNo(\\d*)',
         name: 'articles',
         title: '文章列表',
+        alias: '/:pageNo(\\d*)',
         component: () => import('@/pages/index.vue')
     },
     {
@@ -29,6 +26,12 @@ export const appRouter = [
         name: 'article',
         title: '文章',
         component: () => import('@/pages/article/index.vue')
+    },
+    {
+        path: '/tags',
+        name: 'tags',
+        title: '归档',
+        component: () => import('@/pages/tags/index.vue')
     }
 ];
 

@@ -1,0 +1,47 @@
+{
+    "code": 1,
+    "message": "获取内容成功",
+    "data": [{
+        "year": 2019,
+        "monthList": [{
+            "month": 2,
+            "articleList": [{
+                "title": "2018",
+                "_id": "5c6bb260e992e94ee265353e",
+                "createAt": "2019-02-19T07:38:08.979Z"
+            }]
+        }, {
+            "month": 1,
+            "articleList": [{
+                "title": "22222",
+                "_id": "5c3b20fe57666419fe3d408c",
+                "createAt": "2019-01-13T11:29:02.509Z"
+            }]
+        }]
+    }, {
+        "year": 2018,
+        "monthList": [{
+            "month": 12,
+            "articleList": [{
+                "title": "3333333",
+                "_id": "5c247bb6e35fb85c4c7e1283",
+                "createAt": "2018-12-27T07:13:58.367Z"
+            }, {
+                "title": "444444",
+                "_id": "5c162137e35fb85c4c7e1278",
+                "createAt": "2018-12-16T09:56:07.265Z"
+            }]
+        }, {
+            "month": 11,
+            "articleList": [{
+                "title": "55555",
+                "_id": "5befe57994307c57d4c8d383",
+                "createAt": "2018-11-17T09:55:05.854Z"
+            }, {
+                "title": "66666666",
+                "_id": "5bde8fdf94307c57d4c8d37a",
+                "createAt": "2018-11-04T06:21:19.427Z"
+            }]
+        }]
+    }]
+}

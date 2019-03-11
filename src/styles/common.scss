@@ -25,6 +25,10 @@ body {
                                        border-color .25s linear)
 }
 
+.main-container {
+    margin-top: $normal-pad;
+    min-height: calc(100vh - 10rem);
+}
 .container {
     width: $container-width;
     margin: 0 auto;

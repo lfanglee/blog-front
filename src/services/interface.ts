@@ -7,3 +7,11 @@ export interface GetArticleListParams {
     pageNo: number,
     pageSize: number
 }
+
+export interface GetAllTagsParams {
+
+}
+
+export interface GetAllArticlesParams {
+    
+}

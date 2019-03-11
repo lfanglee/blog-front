@@ -1,5 +1,5 @@
 <template>
-    <div class="c-page-index">
+    <div class="c-page-index container">
         <article-list
             :list="articleList"
             :pagegation="pagegation" />
@@ -12,7 +12,6 @@ import ArticleList from '@/components/article-list/index.vue';
 import { ArticleListItem, Pagegation } from '@/store/modules/article/interface';
 import { GetArticleListParams } from '@/services/interface';
 import { State, Action, namespace } from 'vuex-class';
-import { getArticleList } from '@/services/service';
 
 type GetArticleListFn = (params: GetArticleListParams) => void;
 
@@ -25,11 +24,12 @@ const articleModule = namespace('article');
 })
 export default class Home extends Vue {
     @articleModule.State('articleList')
-    articleList: Array<ArticleListItem>
+    articleList: Array<ArticleListItem>;
     @articleModule.State('pagegation')
-    pagegation: Pagegation
+    pagegation: Pagegation;
+
     @articleModule.Action('getArticleList')
-    getArticleList: GetArticleListFn
+    getArticleList: GetArticleListFn;
 
     async created(): Promise<any> {
         this.getArticleList({
@@ -45,8 +45,4 @@ export default class Home extends Vue {
 <style lang="scss" scoped>
 @import '~@/styles/tools';
 
-.c-page-index {
-    width: $container-width;
-    margin: 0 auto;
-}
 </style>

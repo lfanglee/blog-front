@@ -7,6 +7,11 @@
                         <router-link :to="item.path">{{ item.name }}</router-link>
                     </div>
                 </nav>
+                <div class="header-logo">
+                    <router-link to="/">
+                        <img src="@/images/logo.png" alt="logo">
+                    </router-link>
+                </div>
             </div>
             <div class="header-right"></div>
         </div>
@@ -90,6 +95,17 @@ header {
                     &:hover {
                         color: $black;
                     }
+                }
+            }
+            .header-logo {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -$lg-pad;
+                margin-top: -$lg-pad;
+                img {
+                    display: block;
+                    width: $xlg-pad;
                 }
             }
         }

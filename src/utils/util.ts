@@ -54,7 +54,7 @@ const setScrollTop = function (scrollTop: number): void {
     document.scrollingElement.scrollTop = scrollTop;
 };
 
-const dateFormat = (times: string, format: string) => {
+const dateFormat = function (times: string, format: string): string {
     const time = Date.parse(times);
     const fromNow = (Date.now() - time) / 1000;
     if (fromNow < 60) {
@@ -84,10 +84,21 @@ const dateFormat = (times: string, format: string) => {
     return format;
 };
 
+const textOverflow = function (text: string, lenght: number = text.length): string {
+    const canSub = text && text.length > lenght;
+    return canSub ? text.substr(0, lenght) + '...' : text;
+};
+
+const getMonthNameFromIndex = function (index: number): string {
+    return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][index - 1];
+}
+
 export {
     debounce,
     throttle,
     getScrollTop,
     setScrollTop,
-    dateFormat
+    dateFormat,
+    textOverflow,
+    getMonthNameFromIndex
 };

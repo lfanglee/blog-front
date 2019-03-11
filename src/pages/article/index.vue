@@ -1,5 +1,5 @@
 <template>
-    <div class="c-page-article">
+    <div class="c-page-article container">
         <div class="article-wrapper">
             <h3 class="article-title">{{ articleDetail.title }}</h3>
             <div class="meta">
@@ -47,7 +47,6 @@ export default class Article extends Vue {
     @articleModule.Action('getArticle')
     getArticle: GetArticleFn;
 
-    res: Ajax.AjaxResponse;
     get articleContent(): string {
         return marked(this.articleDetail.content).html;
     }
@@ -64,8 +63,6 @@ export default class Article extends Vue {
 @import '~@/styles/tools';
 
 .c-page-article {
-    width: $container-width;
-    margin: 0 auto;
     .article-title {
         font-size: 2rem;
         color: $black;

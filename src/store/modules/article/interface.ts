@@ -1,7 +1,8 @@
 export interface ArticleState {
     detail: ArticleDetail,
     articleList: Array<ArticleListItem>,
-    pagegation: Pagegation
+    pagegation: Pagegation,
+    allArticles: Array<ArticleMapListYearListItem>
 }
 
 export interface ArticleDetail extends ArticleListItem {
@@ -22,4 +23,20 @@ export interface Pagegation {
     pageNo: number,
     totalPage: number,
     pageSize: number
+}
+
+interface ArticleMapListItem {
+    readonly _id: string,
+    title: string,
+    createAt: string
+}
+
+interface ArticleMapListMonthListItem {
+    month: number,
+    articleList: Array<ArticleMapListItem>
+}
+
+export interface ArticleMapListYearListItem {
+    year: number,
+    monthList: Array<ArticleMapListMonthListItem>
 }

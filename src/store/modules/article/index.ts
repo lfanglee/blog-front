@@ -1,12 +1,14 @@
 import {
     getArticle,
-    getArticleList
+    getArticleList,
+    getAllArticles
 } from '@/services/service';
-import { ArticleState, ArticleDetail, ArticleListItem, Pagegation } from "./interface";
-import { GetArticleParams, GetArticleListParams } from '@/services/interface';
+import { ArticleState, ArticleDetail, ArticleListItem, Pagegation, ArticleMapListYearListItem } from "./interface";
+import { GetArticleParams, GetArticleListParams, GetAllArticlesParams } from '@/services/interface';
 import {
     SET_ARTICLE_DETAIL,
-    SET_ARTICLE_LIST
+    SET_ARTICLE_LIST,
+    SET_ALL_ARTICLES
 } from '../../mutation-types';
 
 const article = {
@@ -16,6 +18,8 @@ const article = {
         detail: {},
         articleList: [],
         pagegation: {},
+
+        allArticles: []
     },
     mutations: {
         [SET_ARTICLE_DETAIL](state: ArticleState, payload: { data: ArticleDetail}) {
@@ -24,6 +28,9 @@ const article = {
         [SET_ARTICLE_LIST](state: ArticleState, payload: { list: Array<ArticleListItem>, pagegation: Pagegation }) {
             state.articleList = payload.list;
             state.pagegation = payload.pagegation;
+        },
+        [SET_ALL_ARTICLES](state: ArticleState, payload: { data: Array<ArticleMapListYearListItem> }) {
+            state.allArticles = payload.data;
         }
     },
     actions: {
@@ -42,6 +49,14 @@ const article = {
                 list: res.data && res.data.list || [],
                 pagegation: res.data && res.data.pagegation || {}
             });
+        },
+        async getAllArticles({ commit }, data: GetAllArticlesParams) {
+            const res = await getAllArticles(data);
+
+            commit({
+                type: SET_ALL_ARTICLES,
+                data: res.data || []
+            })
         }
     }
 };
