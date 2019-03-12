@@ -1,5 +1,5 @@
 <template>
-    <div class="c-page-article container">
+    <div v-if="inited" class="c-page-article container">
         <div class="article-wrapper">
             <h3 class="article-title">{{ articleDetail.title }}</h3>
             <div class="meta">
@@ -47,14 +47,17 @@ export default class Article extends Vue {
     @articleModule.Action('getArticle')
     getArticle: GetArticleFn;
 
+    inited: boolean = false;
+
     get articleContent(): string {
         return marked(this.articleDetail.content).html;
     }
 
     async created(): Promise<any> {
-        this.getArticle({
+        await this.getArticle({
             id: 'articleDemo'
         });
+        this.inited = true;
     }
 }
 </script>

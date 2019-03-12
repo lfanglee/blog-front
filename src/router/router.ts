@@ -32,6 +32,18 @@ export const appRouter = [
         name: 'tags',
         title: '归档',
         component: () => import('@/pages/tags/index.vue')
+    },
+    {
+        path: '/tag/:id',
+        name: 'tag',
+        title: '类别',
+        component: () => import('@/pages/tag/index.vue')
+    },
+    {
+        path: '/about',
+        name: 'about',
+        title: '关于',
+        component: () => import('@/pages/about/index.vue')
     }
 ];
 

@@ -3,7 +3,9 @@
         <article-list
             :showLoading="isLoading"
             :list="articleList"
-            :pagegation="pagegation" />
+            :pagegation="pagegation"
+            @onClickPrePage="handlePrePage"
+            @onClickNextPage="handleNextPage" />
     </div>
 </template>
 
@@ -58,6 +60,16 @@ export default class Home extends Vue {
         this.isLoading = false;    
     }
     
+    handlePrePage(page: number) {
+        this.$router.push({
+            path: `/${page}`
+        });
+    }
+    handleNextPage(page: number) {
+        this.$router.push({
+            path: `/${page}`
+        });
+    }
 }
 </script>
 

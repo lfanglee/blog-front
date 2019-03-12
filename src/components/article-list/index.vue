@@ -13,12 +13,12 @@
             </div>
         </div>
         <div v-if="showArticleEmpty && !showLoading" class="article-empty">没有文章了</div>
-        <div v-if="showPagegation" class="pagegation">
+        <div v-if="showPagegation && !showLoading" class="pagegation">
             <div v-if="showPrePage" class="pre-page">
-                <router-link :to="`/${this.prePage}`">上一页</router-link>
+                <div @click="handlePrePage">上一页</div>
             </div>
             <div v-if="showNextPage" class="next-page">
-                <router-link :to="`/${this.nextPage}`">下一页</router-link>
+                <div @click="handleNextPage">下一页</div>
             </div>
         </div>
         <div class="loading-artilce">
@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component, Prop, Watch } from 'vue-property-decorator';
+import { Vue, Component, Prop, Watch, Emit } from 'vue-property-decorator';
 import PageLoading from '@/components/loading/pageLoading.vue';
 import { ArticleListItem, Pagegation } from '@/store/modules/article/interface';
 
@@ -86,6 +86,16 @@ export default class ArticleList extends Vue {
 
     created(): void {
         this.curPage = +this.$route.params.pageNo || 1;
+    }
+
+    @Emit('onClickPrePage')
+    handlePrePage(): number {
+        return this.prePage;
+    }
+
+    @Emit('onClickNextPage')
+    handleNextPage(): number {
+        return this.nextPage;
     }
 }
 </script>
@@ -147,7 +157,13 @@ export default class ArticleList extends Vue {
         .next-page {
             padding: $md-pad 0;
             color: $black;
+            & > div {
+                cursor: pointer;
+            }
         }
+    }
+    .loading-artilce {
+        padding: $md-pad 0;
     }
 }
 </style>

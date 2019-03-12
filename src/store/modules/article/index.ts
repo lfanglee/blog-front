@@ -19,7 +19,7 @@ const article = {
         articleList: [],
         pagegation: {},
 
-        allArticles: []
+        allArticles: []  // 用于归档页面，带有年月日分层
     },
     mutations: {
         [SET_ARTICLE_DETAIL](state: ArticleState, payload: { data: ArticleDetail}) {

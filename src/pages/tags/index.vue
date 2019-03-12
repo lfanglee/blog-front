@@ -1,5 +1,5 @@
 <template>
-    <div class="c-page-tags container">
+    <div v-if="inited" class="c-page-tags container">
         <div class="tags">
             <div class="title">
                 <p>标签</p>
@@ -64,9 +64,12 @@ export default class Tags extends Vue {
     @tagModule.Action('getAllTags')
     getAllTags: GetAllTagsFn;
 
+    inited: boolean = false;
+
     async created(): Promise<any> {
-        this.getAllTags({})
-        this.getAllArticles({});
+        await this.getAllTags({})
+        await this.getAllArticles({});
+        this.inited = true;
     }
 }
 </script>
