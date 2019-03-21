@@ -6,6 +6,14 @@ export const page404 = {
     },
     component: () => import('@/pages/error-page/404.vue')
 };
+export const page500 = {
+    path: '*',
+    name: 'error-500',
+    meta: {
+        title: '500-页面不存在'
+    },
+    component: () => import('@/pages/error-page/500.vue')
+};
 
 export const appRouter = [
     {
@@ -49,5 +57,6 @@ export const appRouter = [
 
 export const routes = [
     ...appRouter,
-    page404
+    page404,
+    page500
 ];

@@ -42,13 +42,20 @@ const article = {
             });
         },
         async getArticleList({ commit }, data: GetArticleListParams) {
-            const res = await getArticleList(data);
-
-            commit({
-                type: SET_ARTICLE_LIST,
-                list: res.data && res.data.list || [],
-                pagegation: res.data && res.data.pagegation || {}
-            });
+            const res = await getArticleList(data);debugger
+            if (res && res.code) {
+                commit({
+                    type: SET_ARTICLE_LIST,
+                    list: res.data.list || [],
+                    pagegation: res.data && res.data.pagegation || {}
+                });
+            } else {
+                commit({
+                    type: SET_ARTICLE_LIST,
+                    list: [],
+                    pagegation: {}
+                });
+            }
         },
         async getAllArticles({ commit }, data: GetAllArticlesParams) {
             const res = await getAllArticles(data);
@@ -56,7 +63,7 @@ const article = {
             commit({
                 type: SET_ALL_ARTICLES,
                 data: res.data || []
-            })
+            });
         }
     }
 };
