@@ -4,6 +4,13 @@
             <p>关于我</p>
             <span class="line"></span>
         </div>
+        <div class="info-box">
+            <div class="info">
+                <div class="list">
+                    
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 

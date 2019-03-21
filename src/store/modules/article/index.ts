@@ -42,7 +42,7 @@ const article = {
             });
         },
         async getArticleList({ commit }, data: GetArticleListParams) {
-            const res = await getArticleList(data);debugger
+            const res = await getArticleList(data);
             if (res && res.code) {
                 commit({
                     type: SET_ARTICLE_LIST,

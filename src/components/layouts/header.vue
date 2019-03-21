@@ -54,7 +54,7 @@ export default class MyHeader extends Vue {
     nav: Array<RouterLink> = [
         { path: '/', name: '文章' },
         { path: '/tags', name: '归档' },
-        { path: '/about', name: '关于我' }
+        // { path: '/about', name: '关于' }
     ];
     get mobileLayout(): boolean {
         return this.$store.state.app.mobileLayout;
