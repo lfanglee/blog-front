@@ -7,7 +7,7 @@ const redirectToErrorPage = (status: number) => {
     router.push(`error-${status}`);
 };
 const getErrorResponse = (status: number) => ({
-    code: 0,
+    code: status,
     message: `请求出现了${status}错误`,
     data: null
 });

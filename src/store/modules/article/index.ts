@@ -43,7 +43,7 @@ const article = {
         },
         async getArticleList({ commit }, data: GetArticleListParams) {
             const res = await getArticleList(data);
-            if (res && res.code) {
+            if (res && +res.code === 0) {
                 commit({
                     type: SET_ARTICLE_LIST,
                     list: res.data.list || [],
