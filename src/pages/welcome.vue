@@ -28,7 +28,7 @@ export default class Welcome extends Vue {
     right: 0;
     width: 100%;
     height: 100%;
-    background: url('../images/Wallions284236.jpg') no-repeat center 80%;
+    // background: url('../images/Wallions284236.jpg') no-repeat center 80%;
     background-size: cover;
 }
 </style>
