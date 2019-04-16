@@ -23,7 +23,7 @@ module.exports = merge(baseConfig, {
             // favicon: path.resolve(__dirname, '../favicon.ico'),
             filename: 'index.html',
             template: 'index.html',
-            title: 'iLive-admin',
+            title: 'blog-front',
             inject: true,
             minify: {
                 collapseWhitespace: true,
