@@ -5,7 +5,7 @@
                 class="article-list-item"
                 v-for="(item, index) in list"
                 :key="index">
-                <p class="title"><router-link :to="`/article/${item._id}`">{{ item.title }}</router-link></p>
+                <p class="title"><router-link :to="`/article/${item.id}`">{{ item.title }}</router-link></p>
                 <p class="description">{{ item.descript }}</p>
                 <div class="meta">
                     <span class="time">{{ item.createAt | dateFormat('yyyy.MM.dd')}}</span>

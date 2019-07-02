@@ -19,7 +19,7 @@ const tag = {
 
             commit({
                 type: SET_TAG,
-                data: res.data || []
+                data: res.data.tags || []
             })
         }
     }

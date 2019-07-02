@@ -49,13 +49,16 @@ export default class Article extends Vue {
 
     inited: boolean = false;
 
+    articleId: string;
+
     get articleContent(): string {
         return marked(this.articleDetail.content).html;
     }
 
     async created(): Promise<any> {
+        this.articleId = this.$route.params.id
         await this.getArticle({
-            id: 'articleDemo'
+            id: this.articleId
         });
         this.inited = true;
     }

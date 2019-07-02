@@ -10,7 +10,7 @@
                     v-for="(item, index) in tags"
                     :key="index"
                     class="tag-item">
-                    <router-link :to="`/tag/${item._id}`">
+                    <router-link :to="`/tag/${item.id}`">
                         {{ item.name }}
                         <span>({{ item.count }})</span>
                     </router-link>

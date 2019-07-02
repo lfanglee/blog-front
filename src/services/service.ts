@@ -24,7 +24,7 @@ export async function getArticle(params: GetArticleParams): Promise<Ajax.AjaxRes
 
 export async function getArticleList(params: GetArticleListParams): Promise<Ajax.AjaxResponse> {
     try {
-        const res: AxiosResponse = await request.get('/articleList', { params });
+        const res: AxiosResponse = await request.get('/article', { params });
         return res.data;
     } catch (error) {
         error.response.status === 404 ? redirectToErrorPage(404) : redirectToErrorPage(500);
@@ -33,7 +33,7 @@ export async function getArticleList(params: GetArticleListParams): Promise<Ajax
 
 export async function getAllTags(params: GetAllTagsParams): Promise<Ajax.AjaxResponse> {
     try {
-        const res: AxiosResponse = await request.get('/allTags', { params });
+        const res: AxiosResponse = await request.get('/tag', { params });
         return res.data;
     } catch (error) {
         error.response.status === 404 ? redirectToErrorPage(404) : redirectToErrorPage(500);
@@ -42,7 +42,7 @@ export async function getAllTags(params: GetAllTagsParams): Promise<Ajax.AjaxRes
 
 export async function getAllArticles(params: GetAllArticlesParams): Promise<Ajax.AjaxResponse> {
     try {
-        const res: AxiosResponse = await request.get('/allArticles', { params });
+        const res: AxiosResponse = await request.get('/article/timeline', { params });
         return res.data;
     } catch (error) {
         error.response.status === 404 ? redirectToErrorPage(404) : redirectToErrorPage(500);
