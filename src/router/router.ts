@@ -7,7 +7,7 @@ export const page404 = {
     component: () => import('@/pages/error-page/404.vue')
 };
 export const page500 = {
-    path: '*',
+    path: '/error-500',
     name: 'error-500',
     meta: {
         title: '500-页面不存在'
