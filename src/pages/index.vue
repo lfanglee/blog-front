@@ -3,7 +3,7 @@
         <article-list
             :showLoading="isLoading"
             :list="articleList"
-            :pagegation="pagegation"
+            :pagination="pagination"
             @onClickPrePage="handlePrePage"
             @onClickNextPage="handleNextPage" />
     </div>
@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import ArticleList from '@/components/article-list/index.vue';
-import { ArticleListItem, Pagegation } from '@/store/modules/article/interface';
+import { ArticleListItem, pagination } from '@/store/modules/article/interface';
 import { GetArticleListParams } from '@/services/interface';
 import { State, Action, namespace } from 'vuex-class';
 
@@ -28,8 +28,8 @@ const articleModule = namespace('article');
 export default class Home extends Vue {
     @articleModule.State('articleList')
     articleList: Array<ArticleListItem>;
-    @articleModule.State('pagegation')
-    pagegation: Pagegation;
+    @articleModule.State('pagination')
+    pagination: pagination;
 
     @articleModule.Action('getArticleList')
     getArticleList: GetArticleListFn;
@@ -52,8 +52,7 @@ export default class Home extends Vue {
     async loadArticleList(pageNo: number = 1) {
         this.curPageNo = +pageNo || 1;
         this.isLoading = true;
-        await this.getArticleList({    
-            tag: 'xxx',       
+        await this.getArticleList({   
             pageNo: pageNo,
             pageSize: 6
         });

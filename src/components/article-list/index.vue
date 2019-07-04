@@ -8,17 +8,17 @@
                 <p class="title"><router-link :to="`/article/${item.id}`">{{ item.title }}</router-link></p>
                 <p class="description">{{ item.descript }}</p>
                 <div class="meta">
-                    <span class="time">{{ item.createAt | dateFormat('yyyy.MM.dd')}}</span>
+                    <span class="time">{{ item.create_at | dateFormat('yyyy.MM.dd')}}</span>
                 </div>
             </div>
         </div>
         <div v-if="showArticleEmpty && !showLoading" class="article-empty">没有文章了</div>
-        <div v-if="showPagegation && !showLoading" class="pagegation">
-            <div v-if="showPrePage" class="pre-page">
-                <div @click="handlePrePage">上一页</div>
+        <div v-if="showpagination && !showLoading" class="pagination">
+            <div class="pre-page">
+                <div v-if="showPrePage" @click="handlePrePage">上一页</div>
             </div>
-            <div v-if="showNextPage" class="next-page">
-                <div @click="handleNextPage">下一页</div>
+            <div class="next-page">
+                <div v-if="showNextPage" @click="handleNextPage">下一页</div>
             </div>
         </div>
         <div class="loading-artilce">
@@ -30,7 +30,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch, Emit } from 'vue-property-decorator';
 import PageLoading from '@/components/loading/pageLoading.vue';
-import { ArticleListItem, Pagegation } from '@/store/modules/article/interface';
+import { ArticleListItem, pagination } from '@/store/modules/article/interface';
 
 @Component({
     components: {
@@ -50,7 +50,7 @@ export default class ArticleList extends Vue {
         type: Object,
         default: () => {}
     })
-    pagegation: Pagegation;
+    pagination: pagination;
     @Prop({
         type: Boolean,
         default: false
@@ -62,20 +62,20 @@ export default class ArticleList extends Vue {
     get showArticleEmpty(): boolean {
         return !this.list || this.list.length === 0;
     }
-    get showPagegation(): boolean {
-        return this.pagegation && this.pagegation.totalPage > 1;
+    get showpagination(): boolean {
+        return this.pagination && this.pagination.totalPage > 1;
     }
     get showPrePage(): boolean {
-        return this.pagegation.pageNo > 1;
+        return this.pagination.pageNo > 1;
     }
     get showNextPage(): boolean {
-        return this.pagegation.pageNo < this.pagegation.totalPage;
+        return this.pagination.pageNo < this.pagination.totalPage;
     }
     get prePage(): number {
-        return this.pagegation.pageNo > 1 ? this.pagegation.pageNo - 1 : 1;
+        return this.pagination.pageNo > 1 ? this.pagination.pageNo - 1 : 1;
     }
     get nextPage(): number {
-        const { pageNo = 1, totalPage = 1 } = this.pagegation;
+        const { pageNo = 1, totalPage = 1 } = this.pagination;
         return pageNo < totalPage ? pageNo + 1 : totalPage;
     }
 
@@ -149,7 +149,7 @@ export default class ArticleList extends Vue {
         margin-top: $md-pad;
         padding: $md-pad 0;
     }
-    .pagegation {
+    .pagination {
         display: flex;
         justify-content: space-between;
         align-items: center;

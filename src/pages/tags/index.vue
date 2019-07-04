@@ -28,7 +28,7 @@
                     <ul v-for="(month, index) in year.monthList" :key="index" class="month-list">
                         <p class="month-name">{{ month.month | monthFormat }}</p>
                         <li v-for="(item, index) in month.articleList" :key="index" class="article-map-list-item">
-                            <time>{{ item.createAt | dateFormat('MM.dd') }}</time>
+                            <time>{{ item.create_at | dateFormat('MM.dd') }}</time>
                             <router-link :to="`/article/${item._id}`">{{ item.title }}</router-link>
                         </li>
                     </ul>

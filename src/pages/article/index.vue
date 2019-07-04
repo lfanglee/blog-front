@@ -3,7 +3,7 @@
         <div class="article-wrapper">
             <h3 class="article-title">{{ articleDetail.title }}</h3>
             <div class="meta">
-                <span class="time">{{ articleDetail.createAt | dateFormat('yyyy.MM.dd hh:mm') }}</span>
+                <span class="time">{{ articleDetail.create_at | dateFormat('yyyy.MM.dd hh:mm') }}</span>
                 <span class="num">字数 {{ articleDetail.content && articleDetail.content.length }}</span>
             </div>
             <div class="article-content" v-html="articleContent"></div>

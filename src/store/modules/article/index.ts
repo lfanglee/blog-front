@@ -3,7 +3,7 @@ import {
     getArticleList,
     getAllArticles
 } from '@/services/service';
-import { ArticleState, ArticleDetail, ArticleListItem, Pagegation, ArticleMapListYearListItem } from "./interface";
+import { ArticleState, ArticleDetail, ArticleListItem, pagination, ArticleMapListYearListItem } from "./interface";
 import { GetArticleParams, GetArticleListParams, GetAllArticlesParams } from '@/services/interface';
 import {
     SET_ARTICLE_DETAIL,
@@ -17,7 +17,7 @@ const article = {
         // 文章详情
         detail: {},
         articleList: [],
-        pagegation: {},
+        pagination: {},
 
         allArticles: []  // 用于归档页面，带有年月日分层
     },
@@ -25,9 +25,9 @@ const article = {
         [SET_ARTICLE_DETAIL](state: ArticleState, payload: { data: ArticleDetail}) {
             state.detail = payload.data;
         },
-        [SET_ARTICLE_LIST](state: ArticleState, payload: { list: Array<ArticleListItem>, pagegation: Pagegation }) {
+        [SET_ARTICLE_LIST](state: ArticleState, payload: { list: Array<ArticleListItem>, pagination: pagination }) {
             state.articleList = payload.list;
-            state.pagegation = payload.pagegation;
+            state.pagination = payload.pagination;
         },
         [SET_ALL_ARTICLES](state: ArticleState, payload: { data: Array<ArticleMapListYearListItem> }) {
             state.allArticles = payload.data;
@@ -47,13 +47,13 @@ const article = {
                 commit({
                     type: SET_ARTICLE_LIST,
                     list: res.data.list || [],
-                    pagegation: res.data && res.data.pagegation || {}
+                    pagination: res.data && res.data.pagination || {}
                 });
             } else {
                 commit({
                     type: SET_ARTICLE_LIST,
                     list: [],
-                    pagegation: {}
+                    pagination: {}
                 });
             }
         },

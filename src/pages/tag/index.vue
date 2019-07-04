@@ -6,7 +6,7 @@
         </div>
         <article-list
             :list="articleList"
-            :pagegation="pagegation"
+            :pagination="pagination"
             :showLoading="false" />
     </div>
 </template>
@@ -14,7 +14,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { State, Action, namespace } from 'vuex-class';
-import { ArticleListItem, Pagegation } from '@/store/modules/article/interface';
+import { ArticleListItem, pagination } from '@/store/modules/article/interface';
 import { GetArticleListParams } from '@/services/interface';
 import ArticleList from '@/components/article-list/index.vue';
 
@@ -30,8 +30,8 @@ const articleModule = namespace('article');
 export default class Tag extends Vue {
     @articleModule.State('articleList')
     articleList: Array<ArticleListItem>;
-    @articleModule.State('pagegation')
-    pagegation: Pagegation
+    @articleModule.State('pagination')
+    pagination: pagination
 
     @articleModule.Action('getArticleList')
     getArticleList: GetAritcleListFn;

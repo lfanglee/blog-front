@@ -3,9 +3,9 @@ export interface GetArticleParams {
 }
 
 export interface GetArticleListParams {
-    tag: string,
-    pageNo: number,
-    pageSize: number
+    tag?: string,
+    pageNo?: number,
+    pageSize?: number
 }
 
 export interface GetAllTagsParams {
