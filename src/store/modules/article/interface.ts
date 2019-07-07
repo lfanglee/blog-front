@@ -1,7 +1,7 @@
 export interface ArticleState {
     detail: ArticleDetail,
     articleList: Array<ArticleListItem>,
-    pagination: pagination,
+    pagination: Pagination,
     allArticles: Array<ArticleMapListYearListItem>
 }
 
@@ -10,7 +10,7 @@ export interface ArticleDetail extends ArticleListItem {
 }
 
 export interface ArticleListItem {
-    readonly _id: string,
+    readonly id: string,
     title: string,
     thumb: string,
     description: string,
@@ -18,7 +18,7 @@ export interface ArticleListItem {
     [key: string]: any
 }
 
-export interface pagination {
+export interface Pagination {
     total: number,
     pageNo: number,
     totalPage: number,
@@ -26,7 +26,7 @@ export interface pagination {
 }
 
 interface ArticleMapListItem {
-    readonly _id: string,
+    readonly id: string,
     title: string,
     create_at: string
 }

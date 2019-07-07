@@ -10,7 +10,7 @@
                     v-for="(item, index) in tags"
                     :key="index"
                     class="tag-item">
-                    <router-link :to="`/tag/${item.id}`">
+                    <router-link :to="`/tag/${item.id}?tagName=${item.name}`">
                         {{ item.name }}
                         <span>({{ item.count }})</span>
                     </router-link>
@@ -47,7 +47,10 @@ import { GetAllArticlesParams, GetAllTagsParams } from '@/services/interface';
 
 type GetAllArticlesFn = (params: GetAllArticlesParams) => void;
 
-type GetAllTagsFn = (params: GetAllTagsParams) => void;
+type GetAllTagsFn = (params: GetAllTagsParams) => Promise<Ajax.AjaxResponse<{
+    list: Tag[],
+    pagination: Pagination
+}>>;
 
 const articleModule = namespace('article');
 const tagModule = namespace('tag');

@@ -3,7 +3,7 @@ import {
     getArticleList,
     getAllArticles
 } from '@/services/service';
-import { ArticleState, ArticleDetail, ArticleListItem, pagination, ArticleMapListYearListItem } from "./interface";
+import { ArticleState, ArticleDetail, ArticleListItem, ArticleMapListYearListItem } from "./interface";
 import { GetArticleParams, GetArticleListParams, GetAllArticlesParams } from '@/services/interface';
 import {
     SET_ARTICLE_DETAIL,
@@ -25,7 +25,7 @@ const article = {
         [SET_ARTICLE_DETAIL](state: ArticleState, payload: { data: ArticleDetail}) {
             state.detail = payload.data;
         },
-        [SET_ARTICLE_LIST](state: ArticleState, payload: { list: Array<ArticleListItem>, pagination: pagination }) {
+        [SET_ARTICLE_LIST](state: ArticleState, payload: { list: Array<ArticleListItem>, pagination: Pagination }) {
             state.articleList = payload.list;
             state.pagination = payload.pagination;
         },

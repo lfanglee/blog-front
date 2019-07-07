@@ -1,5 +1,5 @@
 export interface Tag {
-    readonly _id: string,
+    readonly id: string,
     name: string,
     count: number
 }

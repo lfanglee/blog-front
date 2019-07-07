@@ -12,7 +12,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import ArticleList from '@/components/article-list/index.vue';
-import { ArticleListItem, pagination } from '@/store/modules/article/interface';
+import { ArticleListItem, Pagination } from '@/store/modules/article/interface';
 import { GetArticleListParams } from '@/services/interface';
 import { State, Action, namespace } from 'vuex-class';
 
@@ -29,7 +29,7 @@ export default class Home extends Vue {
     @articleModule.State('articleList')
     articleList: Array<ArticleListItem>;
     @articleModule.State('pagination')
-    pagination: pagination;
+    pagination: Pagination;
 
     @articleModule.Action('getArticleList')
     getArticleList: GetArticleListFn;

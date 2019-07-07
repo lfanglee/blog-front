@@ -29,10 +29,6 @@
             "@/*": ["src/*"]
         }
     },
-    "files": [
-        "src/types/vue-shim.d.ts",
-        "src/types/ajax.d.ts"
-    ],
     "include": [
         "src/**/*"
     ],

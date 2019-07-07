@@ -30,7 +30,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Watch, Emit } from 'vue-property-decorator';
 import PageLoading from '@/components/loading/pageLoading.vue';
-import { ArticleListItem, pagination } from '@/store/modules/article/interface';
+import { ArticleListItem } from '@/store/modules/article/interface';
 
 @Component({
     components: {
@@ -50,7 +50,7 @@ export default class ArticleList extends Vue {
         type: Object,
         default: () => {}
     })
-    pagination: pagination;
+    pagination: Pagination;
     @Prop({
         type: Boolean,
         default: false

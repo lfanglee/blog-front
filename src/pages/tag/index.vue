@@ -1,7 +1,7 @@
 <template>
     <div class="c-page-tag">
         <div class="title">
-            <p><c-icon type="tags-fill" />&nbsp;&nbsp;标签</p>
+            <p><c-icon type="tags-fill" />&nbsp;&nbsp;{{ tagName }}</p>
             <span class="line"></span>
         </div>
         <article-list
@@ -14,11 +14,14 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { State, Action, namespace } from 'vuex-class';
-import { ArticleListItem, pagination } from '@/store/modules/article/interface';
+import { ArticleListItem } from '@/store/modules/article/interface';
 import { GetArticleListParams } from '@/services/interface';
 import ArticleList from '@/components/article-list/index.vue';
 
-type GetAritcleListFn = (data: GetArticleListParams) => void;
+type GetAritcleListFn = (data: GetArticleListParams) => Promise<Ajax.AjaxResponse<{
+    list: ArticleListItem[],
+    pagination: Pagination
+}>>;
 
 const articleModule = namespace('article');
 
@@ -31,15 +34,17 @@ export default class Tag extends Vue {
     @articleModule.State('articleList')
     articleList: Array<ArticleListItem>;
     @articleModule.State('pagination')
-    pagination: pagination
+    pagination: Pagination
 
     @articleModule.Action('getArticleList')
     getArticleList: GetAritcleListFn;
 
     tagId: string;
+    tagName: string;
 
     async created(): Promise<any> {
         this.tagId = this.$route.params.id;
+        this.tagName = <string>this.$route.query.tagName;
         await this.getArticleList({
             tag: this.tagId,
             pageNo: 1,
