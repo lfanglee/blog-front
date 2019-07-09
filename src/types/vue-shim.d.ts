@@ -6,3 +6,5 @@ declare module '*.vue' {
 }
 
 declare var window: Window;
+
+declare var renderMathInElement: (HTMLElement) => void;

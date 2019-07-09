@@ -53,16 +53,19 @@ export default class Article extends Vue {
     articleId: string;
 
     get articleContent(): string {
-        return marked(this.articleDetail.content).html;
+        // return marked(this.articleDetail.content).html;
+        return md.render(this.articleDetail.content);
     }
 
-    async created(): Promise<any> {
-        console.log(md.renderInline('$$10_2$$'));
+    async created(): Promise<void> {
         this.articleId = this.$route.params.id
         await this.getArticle({
             id: this.articleId
         });
         this.inited = true;
+        this.$nextTick(() => {
+            renderMathInElement(document.body);
+        });
     }
 }
 </script>
