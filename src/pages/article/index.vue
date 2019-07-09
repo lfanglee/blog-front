@@ -35,6 +35,7 @@ import { Action, State, namespace } from 'vuex-class';
 import { ArticleDetail } from '@/store/modules/article/interface';
 import { GetArticleParams } from '@/services/interface';
 import marked from '@/utils/marked';
+import md from '@/utils/markdownit';
 
 type GetArticleFn = (params: GetArticleParams) => void;
 
@@ -56,6 +57,7 @@ export default class Article extends Vue {
     }
 
     async created(): Promise<any> {
+        console.log(md.renderInline('$$10_2$$'));
         this.articleId = this.$route.params.id
         await this.getArticle({
             id: this.articleId
