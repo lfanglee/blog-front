@@ -19,38 +19,50 @@ export const appRouter = [
     {
         path: '/welcome',
         name: 'welcome',
-        title: '欢迎',
+        meta: {
+            title: '欢迎'
+        },
         component: () => import('@/pages/welcome.vue')
     },
     {
         path: '/articles/:pageNo(\\d*)',
         name: 'articles',
-        title: '文章列表',
+        meta: {
+            title: '文章列表'
+        },
         alias: '/:pageNo(\\d*)',
         component: () => import('@/pages/index.vue')
     },
     {
         path: '/article/:id',
         name: 'article',
-        title: '文章',
+        meta: {
+            title: '文章'
+        },
         component: () => import('@/pages/article/index.vue')
     },
     {
         path: '/tags',
         name: 'tags',
-        title: '归档',
+        meta: {
+            title: '归档'
+        },
         component: () => import('@/pages/tags/index.vue')
     },
     {
         path: '/tag/:id',
         name: 'tag',
-        title: '类别',
+        meta: {
+            title: '类别'
+        },
         component: () => import('@/pages/tag/index.vue')
     },
     {
         path: '/about',
         name: 'about',
-        title: '关于',
+        meta: {
+            title: '关于'
+        },
         component: () => import('@/pages/about/index.vue')
     }
 ];
