@@ -69,7 +69,7 @@
     "js-cookie": "^2.2.0",
     "markdown-it": "^12.3.2",
     "markdown-it-mathjax": "^2.0.0",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "vue": "^2.5.22",
     "vue-property-decorator": "^8.0.0",
     "vue-router": "^3.0.2",
